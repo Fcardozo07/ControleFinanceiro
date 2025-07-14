@@ -10,7 +10,10 @@ export const FormCalculadorCDI: React.FC<IFormCalculadorCDI> = ({
     meses,
     setMeses,
     valorFinal,   
-    calcular      
+    calcular,
+    cdiAnual,
+    setCdiAnual,
+    
 
 }) =>{
     return(
@@ -18,6 +21,15 @@ export const FormCalculadorCDI: React.FC<IFormCalculadorCDI> = ({
       <Typography variant="h5" align="center" gutterBottom>
         Calculadora CDI
       </Typography>
+
+      <TextField
+        label="CDI Anual"
+        type="number"
+        value={cdiAnual}
+        onChange={(e) => setCdiAnual(Number(e.target.value))}
+        fullWidth
+        margin="normal"
+      />
 
       <TextField
         label="Valor Inicial (R$)"

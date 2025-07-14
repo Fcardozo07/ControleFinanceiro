@@ -4,12 +4,11 @@ import { useState, useEffect } from "react";
 import api from "../../services/axios";
 import { toast } from "react-toastify";
 import { useFotoUsuarioUpload } from "../FotoUsuario/useFotoUsuarioUpload";
-import useFotoUsuario from "../FotoUsuario/useFotoUsuario";
 import { useFotoUsuarioContext } from "../../contexts/FotoUsuarioContext";
 
 const useEditUsuarioData = () => {
   const usuarioId = sessionStorage.getItem("id");
-  const { reloadFoto } = useFotoUsuarioContext();
+  const { fotoUrl, fotoId, reloadFoto } = useFotoUsuarioContext();
 
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -20,7 +19,7 @@ const useEditUsuarioData = () => {
   const [imagem, setImagem] = useState<File | null>(null);
 
   const { uploadFoto } = useFotoUsuarioUpload();
-  const { fotoUrl, fotoId, fetchFoto } = useFotoUsuario();
+
 
   useEffect(() => {
     const fetchUsuario = async () => {
@@ -38,32 +37,41 @@ const useEditUsuarioData = () => {
     fetchUsuario();
   }, [usuarioId]);
 
-  const handleEditar = async () => {
-    setErro("");
-    if (senha && senha !== senhaRepetida) {
-      setErro("As senhas não coincidem.");
-      toast.error("As senhas não coincidem.");
-      return;
+ const handleEditar = async () => {
+  setErro("");
+  if (senha && senha !== senhaRepetida) {
+    setErro("As senhas não coincidem.");
+    toast.error("As senhas não coincidem.");
+    return;
+  }
+
+  try {
+    const payload: any = {
+      nome,
+      email,
+    };
+
+    if (senha) {
+      payload.senha = senha;
     }
 
-    try {
-      const payload: any = { nome, email };
-      if (senha) payload.senha = senha;
+    await api.put(`/usuario/${usuarioId}`, payload);
 
-      await api.put(`/usuario/${usuarioId}`, payload);
-
-      if (imagem) {
-        await uploadFoto(usuarioId!, imagem);
-        await reloadFoto();  // 👈 força atualizar contexto e refazer re-render
-        setImagem(null);
-      }
-      
-      toast.success("Usuário atualizado com sucesso!");
-    } catch (error) {
-      console.error("Erro ao editar usuário:", error);
-      toast.error("Erro ao editar usuário");
+    if (imagem) {
+      await uploadFoto(usuarioId!, imagem);
+      await reloadFoto();
+      setImagem(null);
     }
-  };
+
+    toast.success("Usuário atualizado com sucesso!");
+  } catch (error) {
+    console.error("Erro ao editar usuário:", error);
+    toast.error("Erro ao editar usuário");
+  }
+};
+
+
+
 
   const handleDeleteFoto = async () => {
     if (!fotoId) return;

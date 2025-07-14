@@ -7,8 +7,7 @@ import { useFotoUsuarioContext } from "../../contexts/FotoUsuarioContext";
 
 export const EditUsuarioForm: React.FC<ICadastroUsuarioFormProps> = ({
   onSubmit,
-  imagem,
-  setImagem,
+
 }) => {
   const {
     nome,
@@ -23,6 +22,8 @@ export const EditUsuarioForm: React.FC<ICadastroUsuarioFormProps> = ({
     setErro,
     handleDeleteFoto,
     handleEditar,
+    imagem, // pega direto do hook
+    setImagem // pega direto do hook
   } = useEditUsuarioData();
 
   const { fotoUrl } = useFotoUsuarioContext();
@@ -107,17 +108,18 @@ export const EditUsuarioForm: React.FC<ICadastroUsuarioFormProps> = ({
       <FormControl fullWidth margin="normal">
         <Typography variant="subtitle1">Adicionar imagem do usuário:</Typography>
         <input
-          accept="image/*"
-          id="upload-imagem"
-          type="file"
-          style={{ display: "none" }}
-          onChange={(e) => {
-            if (e.target.files && e.target.files[0]) {
-              setImagem(e.target.files[0]);
-            }
-          }}
-          disabled={!!fotoUrl} // 👈 aqui!
-        />
+            accept="image/*"
+            id="upload-imagem"
+            type="file"
+            style={{ display: "none" }}
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                setImagem(e.target.files[0]);
+              }
+            }}
+            disabled={!!fotoUrl}
+          />
+
         <label htmlFor="upload-imagem">
           <Button
             variant="contained"

@@ -2,19 +2,25 @@ import { useState } from "react";
 
 
 export const useCalcularorCDIUtil = () => {
-    const [valorInicial, setValorInicial] = useState<number>(0);
-    const [percentualCDI, setPercentualCDI] = useState<number>(100);
-    const [meses, setMeses] = useState<number>(12);
+    const [valorInicial, setValorInicial] = useState<number | "">("");    
+    const [meses, setMeses] = useState<number | "">("");
     const [valorFinal, setValorFinal] = useState<number | null>(null);
+    const [cdiAnual, setCdiAnual] = useState<number | "">("");
+    const [percentualCDI, setPercentualCDI] = useState<number>(100);
 
-    const CDI_ANUAL = 13.15;
+ 
 
-    const calcular = () => {
-        const rentabilidadeMensal = ((CDI_ANUAL /100)*(percentualCDI/100))/12;
-        const resultado = valorInicial * Math.pow(1 + rentabilidadeMensal, meses);
-        setValorFinal(resultado);
-    
-    }
+const calcular = () => {
+  const cdiNum = typeof cdiAnual === "number" ? cdiAnual : 0;
+  const valorNum = typeof valorInicial === "number" ? valorInicial : 0;
+  const percNum = typeof percentualCDI === "number" ? percentualCDI : 0;
+  const mesesNum = typeof meses === "number" ? meses : 0;
+
+  const rentabilidadeMensal = ((cdiNum / 100) * (percNum / 100)) / 12;
+  const resultado = valorNum * Math.pow(1 + rentabilidadeMensal, mesesNum);
+  setValorFinal(resultado);
+};
+
 
     return{
         valorInicial,
@@ -23,7 +29,9 @@ export const useCalcularorCDIUtil = () => {
         setPercentualCDI,
         meses,
         setMeses,
-        valorFinal,      
+        valorFinal,       
+        cdiAnual,
+        setCdiAnual,        
         calcular    
     }
     

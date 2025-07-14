@@ -10,6 +10,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import { useAppThemeContext } from "../../shared/contexts";
 import api from "../../shared/services/axios";
+import { useFotoUsuarioContext } from "../../shared/contexts/FotoUsuarioContext";
 
 
 
@@ -29,10 +30,11 @@ export const TelaLogin = () =>{
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const {toggleTheme} = useAppThemeContext();
+  const { reloadFoto } = useFotoUsuarioContext();
 
   const handleLogin = async(e: React.FormEvent) => {
     e.preventDefault();
-    
+   
    
     try {
       const response = await api.post('/auth/login',{email, senha});
@@ -43,6 +45,7 @@ export const TelaLogin = () =>{
           sessionStorage.setItem("id", data.id);
           sessionStorage.setItem("nome", data.nome);
           sessionStorage.setItem("email", data.email);
+          await reloadFoto(); // 👈 carrega a foto certa do usuário logado
           navigate('/pagina-inicial');
         }else{
           setErro("Email ou senha incorretos")
