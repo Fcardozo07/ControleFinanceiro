@@ -185,7 +185,13 @@ const navigate = useNavigate();
                     icon="label" // ícone que você quiser
                     label="Novo orçamento mensal"
                     onClick={smdown ? toggleDrawerOpen : undefined}
-                    />
+                />
+                <ListItemLink
+                    to="/calcular-cdi"
+                    icon="calculate" // ícone que você quiser
+                    label="Calcular CDI"
+                    onClick={smdown ? toggleDrawerOpen : undefined}
+                />
                 <ListItemButton onClick={handleToggleAreaAdm}>
                 <ListItemIcon>
                     <Icon>admin_panel_settings</Icon>

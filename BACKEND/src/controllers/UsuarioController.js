@@ -26,7 +26,7 @@ class UsuarioController{
 
 
 
-        async store(req, res) {
+async store(req, res) {
   try {
     const { nome, email, senha } = req.body;
 
