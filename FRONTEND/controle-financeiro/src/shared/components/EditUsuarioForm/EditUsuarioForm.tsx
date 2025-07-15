@@ -1,12 +1,8 @@
 import { Box, Button, Container, FormControl, Icon, IconButton, InputLabel, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { ICadastroUsuarioFormProps } from "../../types/usuario";
 import { FotoUsuario } from "../FotoUsuario/FotoUsuario";
-import useEditUsuarioData from "../../hooks/EditarUsuario/useEditUsuarioData";
 import { useFotoUsuarioContext } from "../../contexts/FotoUsuarioContext";
 import { IEditUsuarioFormProps } from "../../types/EditarUsuario/types";
-
-
 
 export const EditUsuarioForm: React.FC<IEditUsuarioFormProps> = ({
  nome,

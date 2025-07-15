@@ -1,6 +1,6 @@
 import { Box, Button, Container, FormControl, Icon, InputLabel, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { ICadastroUsuarioFormProps } from "../../types/usuario";
+import { ICadastroUsuarioFormProps } from "../../types/CadastroUsuario/types";
 
 
 
