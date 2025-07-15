@@ -1,12 +1,11 @@
 import React from "react";
 import { IFormsNovoOrcamento } from "../../types/NovoOrcamento/types";
-import { Box, Button, Container, Divider, FormControl, Icon, InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, Divider, FormControl, Icon, InputLabel, 
+MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableFooter, 
+TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { enqueueSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/axios";
-
-
-
 
 export const FormNovoOrcamento: React.FC<IFormsNovoOrcamento> = ({
     descricaoEntrada,    
@@ -35,12 +34,10 @@ export const FormNovoOrcamento: React.FC<IFormsNovoOrcamento> = ({
     totalValorSaida,
     saldoTotal,
 
-   
-    
+       
 }) => {
 
     const navigate = useNavigate();
-
 
     return(
         <Container maxWidth="lg" sx={{ mt: 2 }}>

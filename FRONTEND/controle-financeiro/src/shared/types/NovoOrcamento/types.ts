@@ -66,5 +66,3 @@ export interface IFormsNovoOrcamento{
     descricaoEntradas: DescricaoItem[];
     descricaoSaidas: DescricaoSaidaItem[];    
 }
-
-

@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import api from "../../services/axios";
 import { useNavigate } from "react-router-dom";
 import { useFotoUsuarioUpload } from "../FotoUsuario/useFotoUsuarioUpload";
+import { useAppThemeContext } from "../../contexts";
 
 
 export const useCadastroUsuarioData = (usuarioId: number | string) => {
@@ -83,6 +84,29 @@ const handleCadastrar = async (fotoFile?: File) => {
     }
   };
 
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const toggleDrawer = (open: boolean) => () => setDrawerOpen(open);
+
+  const menuItems = ["Início", "Sobre", "Contato"];
+  const [imagem, setImagem] = useState<File | null>(null);  
+  
+
+  const handleSubmit = async () => {
+  // Primeiro, cadastra o usuário
+  const usuarioId = await handleCadastrar();
+
+  // Depois, se tiver imagem, envia
+  if (usuarioId && imagem) {
+    await uploadFoto(usuarioId, imagem);
+  }
+};
+
+
+  // Menu lateral (não utilizado diretamente aqui, mas mantido caso precise)
+
+  // Theme context (botão de alternar tema)
+  const { toggleTheme } = useAppThemeContext();
+
   return {
     nome,
     email,
@@ -97,5 +121,12 @@ const handleCadastrar = async (fotoFile?: File) => {
     handleCadastrar,
     handleDelete,
     handleEditar,
+    drawerOpen,
+    setDrawerOpen,
+    toggleDrawer,
+    menuItems,
+    imagem,
+    setImagem,
+    handleSubmit,
   };
 };

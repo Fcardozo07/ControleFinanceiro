@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, Icon, InputLabel, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, FormControl, Icon, InputLabel, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ICadastroUsuarioFormProps } from "../../types/usuario";
 
@@ -23,6 +23,29 @@ export const CadastroUsuarioForm: React.FC<ICadastroUsuarioFormProps> = ({
   const navigate = useNavigate();
 
   return (
+    <Container maxWidth="sm" sx={{ mt: 4, px: 2 }}>
+        <Typography
+          variant="h4"
+          align="center"
+          sx={{
+            fontWeight: 600,
+            fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+            mt: 4,
+            mb: 3,
+          }}
+        >
+          Cadastro de Usuário
+        </Typography>
+                <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            mb: 4,
+          }}
+        >
+          {/* Espaço para imagem ou logo se precisar */}
+        </Box>
       <form onSubmit={(e) => {
       e.preventDefault();
       onSubmit(); // <-- isso aqui estava faltando!
@@ -113,5 +136,6 @@ export const CadastroUsuarioForm: React.FC<ICadastroUsuarioFormProps> = ({
         </Button>
       </Box>
     </form>
+    </Container>
   );
 };

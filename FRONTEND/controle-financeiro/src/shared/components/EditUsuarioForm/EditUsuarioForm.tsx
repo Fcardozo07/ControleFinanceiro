@@ -1,16 +1,15 @@
-import { Box, Button, FormControl, Icon, IconButton, InputLabel, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, FormControl, Icon, IconButton, InputLabel, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ICadastroUsuarioFormProps } from "../../types/usuario";
 import { FotoUsuario } from "../FotoUsuario/FotoUsuario";
 import useEditUsuarioData from "../../hooks/EditarUsuario/useEditUsuarioData";
 import { useFotoUsuarioContext } from "../../contexts/FotoUsuarioContext";
+import { IEditUsuarioFormProps } from "../../types/EditarUsuario/types";
 
-export const EditUsuarioForm: React.FC<ICadastroUsuarioFormProps> = ({
-  onSubmit,
 
-}) => {
-  const {
-    nome,
+
+export const EditUsuarioForm: React.FC<IEditUsuarioFormProps> = ({
+ nome,
     setNome,
     email,
     setEmail,
@@ -23,14 +22,40 @@ export const EditUsuarioForm: React.FC<ICadastroUsuarioFormProps> = ({
     handleDeleteFoto,
     handleEditar,
     imagem, // pega direto do hook
-    setImagem // pega direto do hook
-  } = useEditUsuarioData();
+    setImagem // pega direto 
+
+}) => {
 
   const { fotoUrl } = useFotoUsuarioContext();
 
   const navigate = useNavigate();
 
   return (
+    
+      <Container maxWidth="sm" sx={{ mt: 4, px: 2 }}>
+        <Typography
+          variant="h4"
+          align="center"
+          sx={{
+            fontWeight: 600,
+            fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+            mt: 4,
+            mb: 3,
+          }}
+        >
+          Editar Perfil
+        </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            mb: 4,
+          }}
+        >
+          {/* Espaço para imagem ou logo se precisar */}
+        </Box>
     <form
       onSubmit={(e) => {
         e.preventDefault();
@@ -161,5 +186,6 @@ export const EditUsuarioForm: React.FC<ICadastroUsuarioFormProps> = ({
         </Button>
       </Box>
     </form>
-  );
+    </Container>
+  )
 };
