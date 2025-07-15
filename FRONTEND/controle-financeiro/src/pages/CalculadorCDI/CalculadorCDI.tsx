@@ -5,16 +5,12 @@ import { useCalcularorCDIUtil } from "../../shared/hooks/CalculadorCDI/useCalcul
 import { LayoutBaseDePaginas } from "../../shared/layouts/LayoutBaseDepaginas";
 
 
-
-
 export const CalculadorCDI = () => {
 
     const navigate = useNavigate();
 
     const hook = useCalcularorCDIUtil();
  
-
-
     return(
         <LayoutBaseDePaginas
         titulo="Calculador de CDI"
@@ -31,9 +27,5 @@ export const CalculadorCDI = () => {
         <FormCalculadorCDI {...hook}/>
         </LayoutBaseDePaginas>
        
-
-
-    
-
     );
 }

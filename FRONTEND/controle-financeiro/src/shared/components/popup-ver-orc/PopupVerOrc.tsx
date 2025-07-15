@@ -58,8 +58,6 @@ interface SaidaItem {
 export const PopupVerOrc: React.FC<IPopupVerOrc> = ({ open, onClose, entradas, descricoes, saidas, descricoesSaida }) => {
     const [listaSaidas, setListaSaidas] = useState<ISaida[]>(saidas);
     const [listaEntradas, setListaEntradas] = useState<IEntrada[]>(entradas);
-    const [itensEntrada, setItensEntrada] = useState<EntradaItem[]>([]);    
-    const [itensSaida, setItensSaida] = useState<SaidaItem[]>([]);
     const totalValor = entradas.reduce((acc, item) => acc + Number(item.valorItem || 0), 0);
     const totalValorSaida = saidas.reduce((acc, item) => acc + Number(item.valorItem || 0), 0);
     const saldo = totalValor - totalValorSaida;
@@ -111,7 +109,7 @@ const handleGeneratePdf = async () => {
     document.body.appendChild(clonedElement);
 
     const canvas = await html2canvas(clonedElement, {
-        scale: 2,
+        scale: 1,
         useCORS: true,
         backgroundColor: "#ffffff", // previne fundo transparente
     });

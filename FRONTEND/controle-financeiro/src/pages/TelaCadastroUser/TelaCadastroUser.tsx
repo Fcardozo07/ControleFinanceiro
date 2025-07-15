@@ -52,8 +52,6 @@ export const TelaCadastroUser = () =>{
   }
 };
 
- 
-
   const {toggleTheme} = useAppThemeContext();
 
     return(
@@ -142,15 +140,6 @@ export const TelaCadastroUser = () =>{
           }}
         >
 
-          {/* <img
-            src="assets/images/logo.png"
-            alt="Logo"
-            style={{
-              maxWidth: "100%",
-              height: "auto",
-              maxHeight: 150,
-            }}
-          /> */}
         </Box>
 
         <CadastroUsuarioForm

@@ -71,25 +71,24 @@ class SaidaController {
                 async update(req, res){
                     try {
                         const { id } = req.params;
-                        const { nome, email, senha } = req.body;
+                        const { pago } = req.body;
 
-                        const usuario = await Usuario.findByPk(id);
-                        if(!usuario){
-                            return res.status(404).json({message: 'Usuário não encontrado!'});
+                        const saida = await Saida.findByPk(id);
+                        if (!saida) {
+                            return res.status(404).json({ message: 'Saída não encontrada!' });
                         }
 
-                        usuario.nome = nome;
-                        usuario.email = email;
-
-                        if (senha) {
-                            usuario.senha = senha; // dispara hash
+                        // Atualiza apenas campo pago (ou outros que você queira)
+                        if (pago !== undefined) {
+                            saida.pago = pago;
                         }
 
-                        await usuario.save();
+                        await saida.save();
 
-                        return res.status(200).json(usuario);
+                        return res.status(200).json(saida);
                     } catch (error) {
-                        return res.status(500).json({error: error.message});
+                        console.error("Erro ao atualizar saída:", error);
+                        return res.status(500).json({ error: error.message });
                     }
                 }
 
